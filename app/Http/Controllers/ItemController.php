@@ -12,7 +12,6 @@ class ItemController extends Controller
 
     public function items()
     {
-        // return Item::all();
         $items = Item::orderBy('id', 'desc')->take(10)->paginate(10);
         return ItemResource::collection($items);
     }
