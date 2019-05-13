@@ -51,7 +51,7 @@ class ItemController extends Controller
                 return response()->json(['message' => 'Item saved'], 200);
             } else {
                 // failed
-                return response()->json(['message' => 'Something went wrong'], 500);
+                return response()->json(['message' => 'Something went wron. Please try againg'], 500);
             }
         }
     }
@@ -84,7 +84,7 @@ class ItemController extends Controller
                     return response()->json(['message' => 'Item updated'], 200);
                 } else {
                     // failed
-                    return response()->json(['message' => 'Something went wrong'], 500);
+                    return response()->json(['message' => 'Something went wron. Please try againg'], 500);
                 }
             }
         }
@@ -104,7 +104,7 @@ class ItemController extends Controller
                 return response()->json(['message' => 'Item deleted'], 200);
             } else {
                 // failed
-                return response()->json(['message' => 'Something went wrong'], 500);
+                return response()->json(['message' => 'Something went wrong. Please try again'], 500);
             }
         }
 
