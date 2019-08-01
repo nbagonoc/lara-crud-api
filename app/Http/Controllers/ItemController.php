@@ -10,7 +10,7 @@ use Validator;
 class ItemController extends Controller
 {
 
-    public function items()
+    public function list()
     {
         $items = Item::orderBy('id', 'desc')->take(10)->paginate(10);
         return ItemResource::collection($items);
@@ -32,8 +32,9 @@ class ItemController extends Controller
     public function create(Request $request)
     {
         $validation = [
-            'title' => 'required|string|min:3|max:255',
-            'body' => 'required|string|min:3|max:10000',
+            'name' => 'required|string|min:3|max:255',
+            'weight' => 'required|string|min:3|max:255',
+            'size' => 'required|string|min:3|max:255',
         ];
         $validator = Validator::make($request->all(), $validation);
 
@@ -43,15 +44,16 @@ class ItemController extends Controller
         } else {
             // validation success
             $item = new Item;
-            $item->title = $request->input('title');
-            $item->body = $request->input('body');
+            $item->name = $request->input('name');
+            $item->weight = $request->input('weight');
+            $item->size = $request->input('size');
 
             if ($item->save()) {
                 // success
                 return response()->json(['message' => 'Item saved'], 200);
             } else {
                 // failed
-                return response()->json(['message' => 'Something went wron. Please try againg'], 500);
+                return response()->json(['message' => 'Something went wrong. Please try againg'], 500);
             }
         }
     }
@@ -66,8 +68,9 @@ class ItemController extends Controller
         } else {
             // item found
             $validation = [
-                'title' => 'required|string|min:3|max:255',
-                'body' => 'required|string|min:3|max:10000',
+                'name' => 'required|string|min:3|max:255',
+                'weight' => 'required|string|min:3|max:255',
+                'size' => 'required|string|min:3|max:255',
             ];
             $validator = Validator::make($request->all(), $validation);
 
@@ -76,8 +79,9 @@ class ItemController extends Controller
                 return response()->json($validator->errors(), 400);
             } else {
                 // validation success
-                $item->title = $request->input('title');
-                $item->body = $request->input('body');
+                $item->name = $request->input('name');
+                $item->weight = $request->input('weight');
+                $item->size = $request->input('size');
 
                 if ($item->update()) {
                     // success
@@ -107,6 +111,5 @@ class ItemController extends Controller
                 return response()->json(['message' => 'Something went wrong. Please try again'], 500);
             }
         }
-
     }
 }
