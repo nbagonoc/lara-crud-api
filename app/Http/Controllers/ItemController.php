@@ -40,7 +40,10 @@ class ItemController extends Controller
 
         if ($validator->fails()) {
             // validation failed
-            return response()->json($validator->errors(), 400);
+            return response()->json([
+                "message" => "The given data was invalid.",
+                'errors'=> $validator->errors()
+            ], 400);
         } else {
             // validation success
             $item = new Item;
